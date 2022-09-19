@@ -32,3 +32,25 @@ group by c.id;
 call customer_purchases(1);
 call customer_purchases(2);
 call customer_purchases(3);
+
+select c.username, sum(i.price) 
+from purchase p 
+inner join customer c on c.id = p.customer_id 
+inner join item i on i.id = p.item_id 
+where p.purchase_time > '2020-09-17 16:00:00.000'
+group by c.id;
+
+call purchase_after_date('2020-09-17 16:00:00.000');
+call purchase_after_date('2023-09-17 16:00:00.000');
+call purchase_after_date('2022-09-16 16:00:00.000');
+
+select c.username, avg(i.price) 
+from purchase p 
+inner join customer c on c.id = p.customer_id 
+inner join item i on i.id = p.item_id 
+where p.purchase_time > '2020-09-17 16:00:00' and c.id = 2
+group by c.id;
+
+call average_purchase_by_customer ('2020-09-17 16:00:00', 1);
+call average_purchase_by_customer ('2020-09-17 16:00:00', 2);
+call average_purchase_by_customer ('2020-09-17 16:00:00', 3);
